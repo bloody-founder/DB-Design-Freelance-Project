@@ -1,0 +1,45 @@
+erDiagram
+    USERS {
+        ObjectId _id
+        String username
+        String password
+        String name
+        String bio
+        String profilePicture
+        ObjectId[] friends
+        ObjectId[] blockedUsers
+        Date createdAt
+        Date updatedAt
+    }
+    POSTS {
+        ObjectId _id
+        ObjectId userId
+        String content
+        Date createdAt
+    }
+    FRIEND_REQUESTS {
+        ObjectId _id
+        ObjectId senderId
+        ObjectId receiverId
+        String status
+        Date createdAt
+        Date updatedAt
+    }
+    CHATS {
+        ObjectId _id
+        ObjectId[] participants
+        Date createdAt
+        Date updatedAt
+    }
+    MESSAGES {
+        ObjectId _id
+        ObjectId chatId
+        ObjectId senderId
+        String content
+        Date createdAt
+    }
+    USERS ||--o{ POSTS : "creates"
+    USERS ||--o{ FRIEND_REQUESTS : "sends/receives"
+    USERS ||--o{ CHATS : "participates in"
+    CHATS ||--o{ MESSAGES : "contains"
+    USERS ||--o{ MESSAGES : "sends"
